@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+    <style>
+        .form-group {
+            margin-bottom: 10px;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+        input {
+            padding: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 5px 15px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<h2 th:if="${user.id == null}">Add New User</h2>
+<h2 th:if="${user.id != null}">Edit User</h2>
+
+<form th:action="${user.id == null} ? '/users/add' : '/users/edit'" method="post">
+    <input type="hidden" name="id" th:value="${user.id}">
+
+    <div class="form-group">
+        <label>Name:</label>
+        <input type="text" name="name" th:value="${user.name}" required>
+    </div>
+
+    <div class="form-group">
+        <label>Last Name:</label>
+        <input type="text" name="lastName" th:value="${user.lastName}" required>
+    </div>
+
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" name="email" th:value="${user.email}" required>
+    </div>
+
+    <button type="submit">Save</button>
+    <a href="/users">Cancel</a>
+</form>
+</body>
+</html>
